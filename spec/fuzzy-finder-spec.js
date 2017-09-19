@@ -54,7 +54,7 @@ describe('FuzzyFinder', () => {
     waitsForPromise(() => atom.workspace.open(path.join(rootDir1, 'sample.js')))
 
     waitsForPromise(() =>
-      atom.packages.activatePackage('fuzzy-finder').then((pack) => {
+      atom.packages.activatePackage('jf-fuzzy-finder').then((pack) => {
         fuzzyFinder = pack.mainModule
         projectView = fuzzyFinder.createProjectView()
         bufferView = fuzzyFinder.createBufferView()
@@ -302,7 +302,7 @@ describe('FuzzyFinder', () => {
         })
 
         it('ignores paths that match entries in config.fuzzy-finder.ignoredNames', () => {
-          atom.config.set('fuzzy-finder.ignoredNames', ['sample.js', '*.txt'])
+          atom.config.set('jf-fuzzy-finder.ignoredNames', ['sample.js', '*.txt'])
 
           waitsForPromise(() => projectView.toggle())
 
@@ -507,10 +507,10 @@ describe('FuzzyFinder', () => {
 
           waitsForPromise(() => atom.workspace.open())
 
-          waitsForPromise(() => Promise.resolve(atom.packages.deactivatePackage('fuzzy-finder')))
+          waitsForPromise(() => Promise.resolve(atom.packages.deactivatePackage('jf-fuzzy-finder')))
 
           runs(() => {
-            let states = _.map(atom.packages.getPackageState('fuzzy-finder'), (path, time) => [path, time])
+            let states = _.map(atom.packages.getPackageState('jf-fuzzy-finder'), (path, time) => [path, time])
             expect(states.length).toBe(3)
             states = _.sortBy(states, (path, time) => -time)
 
@@ -606,7 +606,7 @@ describe('FuzzyFinder', () => {
 
           runs(() => {
             expect(atom.workspace.getActiveTextEditor()).toBe(editor1)
-            bufferView.confirm({filePath: expectedPath}, atom.config.get('fuzzy-finder.searchAllPanes'))
+            bufferView.confirm({filePath: expectedPath}, atom.config.get('jf-fuzzy-finder.searchAllPanes'))
           })
 
           waitsFor(() => atom.workspace.getActivePane().getItems().length === 2)
@@ -627,7 +627,7 @@ describe('FuzzyFinder', () => {
       )
 
       describe('when the active pane does not have an item for the selected path and fuzzy-finder.searchAllPanes is true', () => {
-        beforeEach(() => atom.config.set('fuzzy-finder.searchAllPanes', true))
+        beforeEach(() => atom.config.set('jf-fuzzy-finder.searchAllPanes', true))
 
         it('switches to the pane with the item for the selected path', () => {
           const expectedPath = atom.project.getDirectories()[0].resolve('sample.txt')
@@ -644,7 +644,7 @@ describe('FuzzyFinder', () => {
 
           runs(() => {
             expect(atom.workspace.getActiveTextEditor()).toBe(editor1)
-            bufferView.confirm({filePath: expectedPath}, {searchAllPanes: atom.config.get('fuzzy-finder.searchAllPanes')})
+            bufferView.confirm({filePath: expectedPath}, {searchAllPanes: atom.config.get('jf-fuzzy-finder.searchAllPanes')})
           })
 
           waitsFor(() => atom.workspace.getActiveTextEditor().getPath() === expectedPath)
@@ -1122,7 +1122,7 @@ describe('FuzzyFinder', () => {
     })
 
     it('preserves last search when the config is set', () => {
-      atom.config.set('fuzzy-finder.preserveLastSearch', true)
+      atom.config.set('jf-fuzzy-finder.preserveLastSearch', true)
 
       waitsForPromise(() => projectView.toggle())
 
@@ -1165,7 +1165,7 @@ describe('FuzzyFinder', () => {
     })
 
     it('takes selection from active editor and prefills query with it', () => {
-      atom.config.set('fuzzy-finder.prefillFromSelection', true)
+      atom.config.set('jf-fuzzy-finder.prefillFromSelection', true)
 
       waitsForPromise(() => atom.workspace.open())
 
