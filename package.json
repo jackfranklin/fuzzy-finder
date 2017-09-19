@@ -1,9 +1,9 @@
 {
-  "name": "fuzzy-finder",
+  "name": "jf-fuzzy-finder",
   "version": "1.6.0",
   "main": "./lib/main",
   "description": "Open an editor to a file in the project with `cmd-t`.",
-  "repository": "https://github.com/atom/fuzzy-finder",
+  "repository": "https://github.com/jackfranklin/fuzzy-finder",
   "license": "MIT",
   "dependencies": {
     "async": "0.2.6",
@@ -64,6 +64,11 @@
       "type": "boolean",
       "default": false,
       "description": "Prefills search query with selected in current editor text"
+    },
+    "reIndexOnFocus": {
+      "type": "boolean",
+      "default": true,
+      "description": "Reindexes the fuzzy finder file list whenever Atom is focused."
     }
   }
 }
