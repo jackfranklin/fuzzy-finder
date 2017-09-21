@@ -64,11 +64,6 @@
       "type": "boolean",
       "default": false,
       "description": "Prefills search query with selected in current editor text"
-    },
-    "reIndexOnFocus": {
-      "type": "boolean",
-      "default": true,
-      "description": "Reindexes the fuzzy finder file list whenever Atom is focused."
     }
   }
 }
